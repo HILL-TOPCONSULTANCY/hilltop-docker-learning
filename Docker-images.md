@@ -173,8 +173,8 @@ Locally created images can be pushed to Docker Hub or any other docker repo host
 docker login
 ```
 ---
-Enter: `Username`
-Enter: `Password`
+- Enter: `Username`
+- Enter: `Password`
 
 You can then tag and push images to the registry that you are logged in to. Your repository must be specified as `/username/reponame:tag`.
 

@@ -7,6 +7,7 @@
 Unlike a virtual machine, a container does the job of virtualization in a smarter way. Instead of having a complete guest operating system inside a container, it just utilizes the host operating system via the container runtime while maintaining isolation – just like a traditional virtual machine.
 The container runtime, that is Docker, sits between the containers and the host operating system instead of a hypervisor. The containers then communicate with the container runtime which then communicates with the host operating system to get necessary resources from the physical infrastructure.
 As a result of eliminating the entire guest operating system layer, containers are much lighter and less resource-hogging than traditional virtual machines
+
 ![Container Architecture](containers.png)
 
 
