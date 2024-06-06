@@ -1,4 +1,4 @@
-# Docker images
+# Docker Containers
 
 ## What is a docker container?
 - A container is an abstraction at the application layer that packages code and dependencies together. Instead of virtualizing the entire physical machine, containers virtualize the host operating system only.

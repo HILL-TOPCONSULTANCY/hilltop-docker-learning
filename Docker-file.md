@@ -23,6 +23,8 @@
 - **EXPOSE:** Exposes a port for users of the image
 - **VOLUME:** Creates a mount point within the image
 
+## Understanding each Dockerfile Instruction
+
 1.	**FROM instruction**
 The `FROM` instruction sets the Base Image for subsequent instructions. As such, a valid Dockerfile must have `FROM` as its first instruction. The image can be any valid image. It is especially easy to start by pulling an image from the Public Repositories.
 - `FROM` must be the first non-comment instruction in the Dockerfile.
