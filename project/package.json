@@ -1,0 +1,15 @@
+{
+    "name": "hilltop-nodejs-image",
+    "version": "1.0.0",
+    "description": "Hilltop Demo App",
+    "author": "Hilltop Consultancy", 
+    "license": "MIT",
+    "main": "app.js",
+    "keywords": [
+    "nodejs", 
+    "bootstrap", 
+    "express"
+    ], 
+    "dependencies": {
+    "express": "^4.16.4" }
+}
