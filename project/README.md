@@ -1,3 +1,38 @@
+## Creating NodeJS application
+### Prequisite 
+- Amazon Linux EC2 instance
+- Docker installed on the EC2 instance
+- Node.js and npm installed on the instance
+- A Docker hub account
+
+###   Installing  nodejs application dependencies
+
+To create an image, we will first need to make our application files, which we can then copy to the container. These files will include our application’s static content, code, and dependencies.
+- Create a directory for your project in your non-root user’s home directory. The directory in this example named `node_project`.
+
+```
+mkdir node_project
+```
+
+- Navigate to this directory
+
+```
+cd node_project
+```
+
+This will be the root directory of the project
+
+- Next, create a `package.json` file with the project’s dependencies and other identifying information. Open the file with `vim` 
+```
+vi  package.json
+
+```
+
+- Add the following information about the project, including its name, author, license, entrypoint, and dependencies. Be sure to replace the author information with your own name and contact details:
+```
+
+
+
 ## Devops-fully-Docker-Image-deployment-with-Jenkins
 Fully automated and secured Terraform infra pipeline
 
