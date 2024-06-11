@@ -18,6 +18,16 @@ pipeline{
                 		git branch: 'main', url: 'https://github.com/HILL-TOPCONSULTANCY/hilltop-docker-learning.git'
             		}
         	}
+
+		stage('Installing docker'){
+			steps {
+				sh 'sudo yum update -y'
+				sh 'sudo yum -y install docker'
+				sh 'sudo service docker start'
+				sh 'sudo systemctl enable docker.service'
+				sh 'sudo chmod 666 /var/run/docker.sock'
+			}
+		}
 	
 //Building and tagging our Docker image
 
