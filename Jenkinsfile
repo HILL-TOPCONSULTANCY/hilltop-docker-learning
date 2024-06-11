@@ -2,6 +2,9 @@
 pipeline{
 
 	agent any
+	tools  {
+		docker 'Docker'
+	}
 
 	//rename the user name michaelgwei86 with the username of your dockerhub repo
 	environment {
