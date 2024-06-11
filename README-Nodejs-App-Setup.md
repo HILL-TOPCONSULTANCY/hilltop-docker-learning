@@ -127,14 +127,14 @@ app.listen(port, function () {
     console.log('Example app listening on port 8080!')
 })
 ```
-- - The `require` function loads the `express` module, which is used to create the `app` and `router` objects. The `router` object will perform the routing function of the application and as you define HTTP method routes you will add them to this object to define how your application will handle requests.
-- -  The first section of the file also sets a couple of constants, `path` and `port`:
-- - - path: Defines the base directory, which will be the `views` subdirectory within the current project directory.
-- - - port: Tells the app to listen on and bind to port `8080`.
+- The `require` function loads the `express` module, which is used to create the `app` and `router` objects. The `router` object will perform the routing function of the application and as you define HTTP method routes you will add them to this object to define how your application will handle requests.
+- The first section of the file also sets a couple of constants, `path` and `port`:
+- path: Defines the base directory, which will be the `views` subdirectory within the current project directory.
+- port: Tells the app to listen on and bind to port `8080`.
 
-- -  The `router.use` function loads a middleware function that will log the router’s requests and pass them on to the application’s routes. These are defined in the subsequent functions, which specify that a `GET` request to the base project URL should return the `index.html` page, while a GET request to the `/containers` route should return `containers.html`.
+- The `router.use` function loads a middleware function that will log the router’s requests and pass them on to the application’s routes. These are defined in the subsequent functions, which specify that a `GET` request to the base project URL should return the `index.html` page, while a GET request to the `/containers` route should return `containers.html`.
 
-- - Finally, mount the router middleware and the application’s static assets and tell the app to listen on port `8080`
+- Finally, mount the router middleware and the application’s static assets and tell the app to listen on port `8080`
 
 - Save and close the file when finished
 - Next, we add some static content to the application. Start by creating the `views` directory:
@@ -380,7 +380,7 @@ This image includes Node.js and npm. Each Dockerfile must begin with a FROM inst
 By default, the Docker Node image includes a non-root `node` user that you can use to avoid running your application container as `root`. We will therefore use the node user’s home directory as the working directory for our application and set them as our user inside the container
 To fine-tune the permissions on your application code in the container, create the `node_modules` subdirectory in `/home/node` along with the app directory. Creating these directories will ensure that they have the correct permissions, which will be important when you create local node modules in the container with `npm install`. In addition to creating these directories, set ownership on them to your node user. 
 
-- RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+- `RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app`
 
 - We set the working directory of the application to /home/node/app.
 
@@ -416,7 +416,7 @@ Finally, expose port `8080` on the container and start the application:
 ### Creating a .dockerignore file
 Before building the application image, add a .dockerignore file. Working in a similar way to a .gitignore file, .dockerignore specifies which files and directories in your project directory should not be copied over to your container.
 
-- Open the .dockerignore file
+- Open the `.dockerignore `file
 ```
 vi .dockerignore
 ```
@@ -447,9 +447,9 @@ docker images
 
 ### Building the creating a container from  the Image
 It is now possible to create a container with this image using `docker run`. You will include three flags with this command
-- - `-p`: This publishes the port on the container and maps it to a port on your host. You can use port 80 on the host, but you should feel free to modify this as necessary if you have another process running on that port. 
-- - `-d`: This runs the container in the background.
-- - `--name`: This allows you to give the container a memorable name.
+- `-p`: This publishes the port on the container and maps it to a port on your host. You can use port 80 on the host, but you should feel free to modify this as necessary if you have another process running on that port. 
+- `-d`: This runs the container in the background.
+- `--name`: This allows you to give the container a memorable name.
 
 Run the following command to build the container
 ```
@@ -481,51 +481,24 @@ docker push hilltopconsultancy/class2024a:v1
 ```
 ---
 
-
-
-
-
-
-
-
-
-
-
-i.	First, open app.js in the main project directory (node_project) to define the project’s routes
-
-vi app.js
-
-ii.	Copy and paste the following application code into the app.js file created
-
-
-
 ## Devops-fully-Docker-Image-deployment-with-Jenkins
-Fully automated and secured Terraform infra pipeline
+Creating a Jenkins pipeline for the deployment
 
-## CICD Infra setup
-1) ###### GitHub setup
-    Fork GitHub Repository by using the existing repo "jenkins-cicd-repo" (https://github.com/HILL-TOPCONSULTANCY/jenkins-cicd-repo.git)     
-    - Go to GitHub (github.com)
-    - Login to your GitHub Account
-    - Fork repository "jenkins-cicd-repo" (https://github.com/HILL-TOPCONSULTANCY/jenkins-cicd-repo.git) & name it "jenkins-cicd-repo.git"
-    - Clone your newly created repo to your local
+- Pull the Jenkins image from dockerhub
+```
+docker pull jenkins/jenkins:latest
+```
+- Start the Jenkins  CI service by  running the `jenkins` container image
+```
+docker run  -d -p 8080:8080 jenkins/jenkins:latest
+```
 
-2) ###### Jenkins
-    - Create an **Amazon Linux 2 VM** instance and call it "Jenkins"
-    - Instance type: t2.medium
-    - Security Group (Open): 8080, 9100 and 22 to 0.0.0.0/0
-    - Key pair: Select or create a new keypair
-    - **Attach Jenkins server with IAM role having "AdministratorAccess"**
-    - Launch Instance
-    - After launching this Jenkins server, attach a tag as **Key=Application, value=jenkins**
-    - SSH into the instance and Run the following commands in the **jenkins.sh** file found in the **installation-files** directory
-
-### Jenkins setup
+- Jenkins setup
 1) #### Access Jenkins
     Copy your Jenkins Public IP Address and paste on the browser = **ExternalIP:8080**
     - Login to your Jenkins instance using your Shell (GitBash or your Mac Terminal)
     - Copy the Path from the Jenkins UI to get the Administrator Password
-        - Run: `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
+        - Run: `docker exec 979dc3192c9c cat /var/jenkins_home/secrets/initialAdminPassword` #remember to replace `979dc3192c9c` with your container ID
         - Copy the password and login to Jenkins
     - Plugins: Choose Install Suggested Plugings 
     - Provide 
@@ -536,7 +509,7 @@ Fully automated and secured Terraform infra pipeline
 
 2)  #### Pipeline creation
     - Click on **New Item**
-    - Enter an item name: **jenkins-cicd-pipeline** & select the category as **Pipeline**
+    - Enter an item name: **hilltopconsultancy-nodejs-app-pipeline** & select the category as **Pipeline**
     - Now scroll-down and in the Pipeline section --> Definition --> Select Pipeline script from SCM
     - SCM: **Git**
     - Repositories
@@ -544,13 +517,6 @@ Fully automated and secured Terraform infra pipeline
         - Branch Specifier (blank for 'any'): */main
         - Script Path: Jenkinsfile
     - Save
-
-3)  #### Plugin installations:
-    - Click on "Manage Jenkins"
-    - Click on "Plugin Manager"
-    - Click "Available"
-    - Search and Install the following Plugings "Install Without Restart"        
-        - **Terraform**
 
 4)  #### Credentials setup(AWS):
     - Click on Manage Jenkins --> Manage Credentials --> Global credentials (unrestricted) --> Add Credentials
@@ -561,17 +527,16 @@ Fully automated and secured Terraform infra pipeline
             - Description: DOCKERHUB_CREDENTIALS
             - Click on Create            
 
-
 ### Performing continous integration with GitHub webhook
 
 1) #### Add jenkins webhook to github
-    - Access your repo **jenkins_with_terraform_deployment** on github
+    - Access your repo **hilltop-docker-learning** on github
     - Goto Settings --> Webhooks --> Click on Add webhook 
     - Payload URL: **htpp://REPLACE-JENKINS-SERVER-PUBLIC-IP:8080/github-webhook/**    (Note: The IP should be public as GitHub is outside of the AWS VPC where Jenkins server is hosted)
     - Click on Add webhook
 
 2) #### Configure on the Jenkins side to pull based on the event
-    - Access your jenkins server, pipeline **jenkins-cicd-pipeline**
+    - Access your jenkins server, pipeline **hilltopconsultancy-nodejs-app-pipeline**
     - Once pipeline is accessed --> Click on Configure --> In the General section --> **Select GitHub project checkbox** and fill your repo URL of the project.
     - Scroll down --> In the Build Triggers section -->  **Select GitHub hook trigger for GITScm polling checkbox**
 
@@ -580,9 +545,10 @@ Once both the above steps are done click on Save.
 
 ### Codebase setup
 
-1) #### For checking the Gitbut webhook uncomment lines 18-24 in main.tf file
-    - Go back to your local, open your "jenkins-cicd-repo" project on VSCODE
-    - Open "main.tf file" uncomment lines   
+1) #### For checking the Gitbut webhook, go to your index.html file  uncomment lines 32 by removing the <!-- --> in the index.html file
+    - Go back to your local, open your "hilltop-docker-learning" project on VSCODE
+    - cd to `project`
+    - Open "index.html file" uncomment lines   
     - Save the changes in both files
     - Finally push changes to repo
         `git add .`
@@ -590,4 +556,4 @@ Once both the above steps are done click on Save.
         `git push`
 ### Finally observe the whole flow and understand the integrations
 
-# Happy learning from Hilltop  Consultancy
+# Happy learning from HilltopConsultancy

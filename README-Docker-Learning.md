@@ -79,5 +79,4 @@ sudo usermod -a -G docker ec2-user
 sudo chmod 666 /var/run/docker.sock
 
 ````
-
 ## Happy  Learning from Hilltop Consultancy
