@@ -2,15 +2,12 @@
 pipeline{
 
 	agent any
-	tools  {
-		docker 'Docker'
-	}
 
 	//rename the user name michaelgwei86 with the username of your dockerhub repo
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('DOCKERHUB_CREDENTIALS')
 		IMAGE_REPO_NAME = "hilltopconsultancy/class2024a-img-"
-		CONTAINER_NAME= "hilltopconsultancy/class2024a-cont-"
+		CONTAINER_NAME= "hilltopconsultancy_class2024a-cont_"
 	}
 	
 //Downloading files into repo
