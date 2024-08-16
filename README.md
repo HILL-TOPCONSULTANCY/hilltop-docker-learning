@@ -79,4 +79,16 @@ sudo usermod -a -G docker ec2-user
 sudo chmod 666 /var/run/docker.sock
 
 ````
+
+
+## FOR AMAZON LINUX 2
+```sh
+sudo yum update -y
+sudo amazon-linux-extras install docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker jenkins
+sudo service jenkins restart
+docker --version
+```
 ## Happy  Learning from Hilltop Consultancy
