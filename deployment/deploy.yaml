@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nodejs
-        image: hilltopconsultancy/nodejs-app:v1
+        image: chafah/honoapp:v5
         ports:
         - containerPort: 8080
