@@ -409,7 +409,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 1. **Build the Docker Image**  
    In the root of your project directory (where the `Dockerfile` is located), run:
    ```bash
-   docker build -t hilltopconsultancy/my-app:1.0 .
+   docker build -t hilltopconsultancy/docker-learning:v1 .
    ```
    This command:
    - Names your image `hilltopconsultancy/my-app`.
