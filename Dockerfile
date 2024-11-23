@@ -10,8 +10,8 @@ USER node
 
 RUN npm install
 
-COPY --chown=node:node . 
-.
+COPY --chown=node:node . .
+
 ENV NODE_ENV=production
 
 LABEL maintainer="htconsult.dk"
