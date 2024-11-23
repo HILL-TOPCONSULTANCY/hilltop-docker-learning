@@ -10,7 +10,15 @@ USER node
 
 RUN npm install
 
-COPY --chown=node:node . .
+COPY --chown=node:node . 
+.
+ENV NODE_ENV=production
+
+LABEL maintainer="htconsult.dk"
+
+LABEL version="1.0"
+
+LABEL description="This is a Node.js application."
 
 EXPOSE 8080
 
