@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hilltop-ds
+  labels:
+    app: hilltop-ds
+spec:
+  selector:
+    matchLabels:
+      app: hilltop-ds
+  template:
+    metadata:
+      labels:
+        app: hilltop-ds
+    spec:
+      containers:
+      - name: hilltop-container
+        image: hilltopconsultancy/class2024a:v1
+        ports:
+          - containerPort: 8080

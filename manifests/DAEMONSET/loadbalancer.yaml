@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  hilltop-lb-svc
+spec:
+  selector:
+    app:  hilltop-ds
+  type:  LoadBalancer
+  ports:
+  - protocol:  TCP
+    port:  80
+    targetPort:  8080

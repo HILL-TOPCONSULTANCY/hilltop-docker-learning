@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hilltop-service
+spec:
+  selector:
+    name: devops
+  ports:
+  - port: 50
+    targetPort: 8080
